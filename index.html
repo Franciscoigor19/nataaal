@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banner Natalino Contábil</title>
+
+<!-- Fonte natalina -->
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background:#100303;
+    overflow:hidden;
+}
+
+/* FUNDO NATALINO – CORES MAIS RICAS */
+.banner {
+    position:relative;
+    width:100%;
+    height:440px;
+    background:
+        radial-gradient(circle at top left, #ff0000, transparent 55%),
+        radial-gradient(circle at top right, #008000, transparent 55%),
+        radial-gradient(circle at bottom, #b8860b, #0b2d26);
+    background-size:200% 200%;
+    animation:bgMove 20s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes bgMove {
+    0%   { background-position:0% 50%, 100% 50%, 50% 100%; }
+    50%  { background-position:100% 50%, 0% 50%, 50% 0%; }
+    100% { background-position:0% 50%, 100% 50%, 50% 100%; }
+}
+
+/* TÍTULO */
+.banner h1 {
+    position:absolute;
+    top:185px;
+    width:100%;
+    text-align:center;
+    font-family:'Mountains of Christmas', cursive;
+    font-size:3.4rem;
+    letter-spacing:8px;
+    color:#fff;
+    z-index:10;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow:0 0 10px #fff, 0 0 25px gold; }
+    to   { text-shadow:0 0 25px #fff, 0 0 50px red; }
+}
+
+/* NEVE */
+.snowflake {
+    position:absolute;
+    top:-20px;
+    color:#fff;
+    font-size:18px;
+    opacity:.95;
+    animation:fall linear infinite;
+    z-index:9;
+    pointer-events:none;
+}
+
+@keyframes fall {
+    0%   { transform:translateY(0) translateX(0); }
+    100% { transform:translateY(480px) translateX(35px); opacity:.2; }
+}
+
+/* TRENÓ COM RENAS */
+.sledge {
+    position:absolute;
+    top:80px;
+    right:-450px;
+    font-size:3.8rem;
+    z-index:11;
+    white-space:nowrap;
+    animation:flyLeft 22s linear infinite;
+}
+
+@keyframes flyLeft {
+    0%   { right:-500px; top:150px; transform:scale(.9); }
+    50%  { top:60px; }
+    100% { right:110%; top:150px; transform:scale(1); }
+}
+
+/* ÁRVORES GIGANTES */
+.tree {
+    position:absolute;
+    bottom:5px;
+    font-size:9.5rem;
+    animation:sway 5s infinite ease-in-out;
+    z-index:7;
+}
+
+.tree.mid { font-size:8.2rem; opacity:.9; }
+.tree.far { font-size:7.2rem; opacity:.85; }
+
+@keyframes sway {
+    0%   { transform:rotate(-2.5deg); }
+    50%  { transform:rotate(2.5deg); }
+    100% { transform:rotate(-2.5deg); }
+}
+
+/* PRESENTES */
+.gift {
+    position:absolute;
+    bottom:30px;
+    font-size:3.3rem;
+    animation:bounce 2.2s infinite;
+    z-index:8;
+}
+
+@keyframes bounce {
+    0%,100% { transform:translateY(0); }
+    50%     { transform:translateY(-20px); }
+}
+
+/* ESTRELAS */
+.star {
+    position:absolute;
+    color:#ffd700;
+    opacity:.8;
+    animation:twinkle 2.5s infinite alternate;
+    z-index:6;
+}
+
+@keyframes twinkle {
+    from { opacity:.3; }
+    to   { opacity:1; }
+}
+
+/* RESPONSIVO */
+@media(max-width:768px) {
+    .banner h1 { font-size:2.5rem; }
+    .tree { font-size:6.2rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="banner">
+
+    <h1>CONTÁBIL</h1>
+
+    <!-- RENAS + TRENÓ -->
+    <div class="sledge">🦌 🦌 🛷</div>
+
+    <!-- ESTRELAS -->
+    <div class="star" style="top:50px; left:18%;">⭐</div>
+    <div class="star" style="top:90px; right:22%;">⭐</div>
+    <div class="star" style="top:60px; right:45%;">⭐</div>
+
+    <!-- ÁRVORES GIGANTES -->
+    <div class="tree far" style="left:10px;">🎄</div>
+    <div class="tree mid" style="left:170px;">🎄</div>
+    <div class="tree" style="left:360px;">🎄</div>
+
+    <div class="tree" style="right:360px;">🎄</div>
+    <div class="tree mid" style="right:170px;">🎄</div>
+    <div class="tree far" style="right:10px;">🎄</div>
+
+    <!-- PRESENTES -->
+    <div class="gift" style="left:140px;">🎁</div>
+    <div class="gift" style="left:300px;">🎁</div>
+    <div class="gift" style="right:300px;">🎁</div>
+    <div class="gift" style="right:140px;">🎁</div>
+
+</div>
+
+<script>
+const banner = document.querySelector('.banner');
+
+function createSnow(){
+    const snow = document.createElement('div');
+    snow.className = 'snowflake';
+    snow.innerHTML = '❄';
+    snow.style.left = Math.random() * window.innerWidth + 'px';
+    snow.style.fontSize = (Math.random()*18 + 12) + 'px';
+    snow.style.animationDuration = (Math.random()*3 + 4) + 's';
+    banner.appendChild(snow);
+    setTimeout(() => snow.remove(), 9000);
+}
+setInterval(createSnow, 80);
+</script>
+
+</body>
+</html>
